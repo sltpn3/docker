@@ -1,0 +1,1 @@
+docker run -v /home/docker/centos-be/alias_data/:/home/log/data -v /home/docker/centos-be/nltk_data/:/usr/share/nltk_data -v /home/docker/centos-be/backend/:/home/backend --hostname docker-be -it centos-be
