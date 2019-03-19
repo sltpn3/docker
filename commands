@@ -1,0 +1,19 @@
+docker exec -it <container name> <command>
+docker  run -d testbuild:latest tail -f /dev/null
+docker run -d -p 8080:80 centos-fe tail -f /dev/null
+docker build --tag=testbuild .
+
+docker commit 43a879e098e5 centos-nginx
+docker tag centos-nginx 206.189.92.116:5000/centos-nginx
+docker push 206.189.92.116:5000/centos-nginx
+
+>>insecure registry
+>open /etc/sysconfig/docker
+>add --insecure-registry <host>:<port>
+
+yum install epel-release mysql postgresql geos blas lapack
+
+docker run -v /home/docker/centos-parser-pilpres/nltk_data/:/usr/share/nltk_data -v /home/docker/centos-parser-pilpres/backend_perception-debat/:/home/backend_perception-debat --hostname docker-parser -it parser-pilpres
+
+docker export NAME | gzip > NAME.gz
+zcat NAME.gz | docker import - NAME

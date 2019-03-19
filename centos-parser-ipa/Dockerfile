@@ -10,20 +10,20 @@ COPY etc/ld.so.conf /etc/
 ENV LD_LIBRARY_PATH=/opt/python2.7/lib
 
 # Install any needed packages specified in requirements.txt
-RUN yum -y -v install epel-release
-RUN rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
-RUN rpm -Uvh http://li.nux.ro/download/nux/dextop/el6/x86_64/nux-dextop-release-0-2.el6.nux.noarch.rpm
-
+RUN yum -y install epel-release
+RUN yum -y install mysql postgresql geos blas lapack
+#RUN yum -y install epel-release
 #RUN yum -y install nginx
-RUN yum -y  install ntp vixie-cron libxslt ffmpeg ffmpeg-devel postfix libevent
-
+#RUN yum -y  install ntp vixie-cron libxslt
 
 RUN mv /etc/localtime /etc/localtime.backup && ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 #RUN ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 
-COPY etc/pam.d/crond /etc/pam.d/
+RUN ln -s /opt/python2.7/bin/python /usr/bin/python2.7
 
-RUN /etc/init.d/ntpd start && /etc/init.d/rsyslog start && /etc/init.d/postfix start && /etc/init.d/crond start
+#COPY etc/pam.d/crond /etc/pam.d/
+
+#RUN /etc/init.d/ntpd start && /etc/init.d/rsyslog start && /etc/init.d/postfix start && /etc/init.d/crond start
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
